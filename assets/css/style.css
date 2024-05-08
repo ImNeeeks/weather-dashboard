@@ -1,62 +1,64 @@
-h1,
-h2,
-h3,
-h4,
-h5 {
-    font-family: tahoma, sans-serif;
+:root {
+    --main-bc: rgb(83, 83, 83);
+    --light-text: #fcffe0;
+    --accent: #f0e119;
 }
+
+body {
+    background-color: var(--main-bc);
+    color: var(--light-text);
+}
+.list-group-item {
+    border: none;
+    background-color: var(--light-text);
+}
+
+.card-header {
+    background-color: var(--accent);
+    font-weight: bold;
+}
+
+.forecast-card {
+    border: 1px solid black;
+    padding-left: 0;
+}
+
+.weather-emoji {
+    font-size: 2rem;
+}
+
 
 .row {
-    padding-left: 30px;
-    padding-right: 30px;
-
-
+    --bs-gutter-x: 0;
 }
 
-h1 {
-    text-align: center;
-    font-kerning: none;
-
+#searchBtn {
+    background-color: var(--main-bc);
+    color: var(--accent);
+    border-color: var(--accent);
 }
 
-#submit {
-    background-color: orange;
-    border-color: orange;
-    font-family: tahoma, sans-serif;
-    margin-top: 20px;
-    color: white;
-
+#searchBtn:hover {
+    color: var(--light-text);
+    border-color: var(--light-text);
 }
 
-i {
-    color: orange;
+.prevCityButton {
+    width: 75%;
+    background-color: var(--accent);
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
 }
 
-h2 {
-
-    color: orange;
+.deleteCityButton {
+    background-color: var(--accent);
+    color: black;
+    font-weight: bold;
+    margin-right: 10px;
 }
 
-footer {
-    text-align: center;
-}
-
-.hide {
-    display: none;
-}
-
-.secondary-container {
-    display: flex;
-}
-
-.sideBar {
-    padding-left: 50px;
-}
-
-aside {
-    padding: 20px;
-}
-
-#forecast-heading {
-    color: orange;
+.prevCityButton:hover,
+.deleteCityButton:hover {
+    background-color: var(--light-text);
 }
