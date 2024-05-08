@@ -1,0 +1,62 @@
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: tahoma, sans-serif;
+}
+
+.row {
+    padding-left: 30px;
+    padding-right: 30px;
+
+
+}
+
+h1 {
+    text-align: center;
+    font-kerning: none;
+
+}
+
+#submit {
+    background-color: orange;
+    border-color: orange;
+    font-family: tahoma, sans-serif;
+    margin-top: 20px;
+    color: white;
+
+}
+
+i {
+    color: orange;
+}
+
+h2 {
+
+    color: orange;
+}
+
+footer {
+    text-align: center;
+}
+
+.hide {
+    display: none;
+}
+
+.secondary-container {
+    display: flex;
+}
+
+.sideBar {
+    padding-left: 50px;
+}
+
+aside {
+    padding: 20px;
+}
+
+#forecast-heading {
+    color: orange;
+}
