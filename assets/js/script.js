@@ -17,7 +17,7 @@ let city = localStorage.getItem('currentCity') || 'Irvine';
 // Set searched city history from local storage or start empty array
 let cityList = JSON.parse(localStorage.getItem('cityList')) || [];
 
-/* --------------FUNCTIONS DEALING WITH CITY SEARCH LIST---------------- */
+/* --------------FUNCTIONS FOR CITY SEARCH LIST---------------- */
 // Render City List with delete buttons
 function renderCityList() {
     resetCityList();
@@ -35,6 +35,7 @@ function renderCityList() {
         prevCitiesList.append(cityButtonContainer);
     }
 }
+
 // Add searched cities to list
 function addCityToList() {
     if (cityInput.value !== '') {
@@ -48,12 +49,13 @@ function addCityToList() {
     }
     return cityList;
 }
+
 // Reset City List
 function resetCityList() {
     prevCitiesList.innerText = '';
 }
 
-/* --------------------- RENDERING CITY CONDITIONS ------------------------- */
+/* --------------------- Renders City Conditions ------------------------- */
 // Setting emoji based on conditions
 function setWeatherEmoji (day) {
     let emoji;
@@ -71,6 +73,7 @@ function setWeatherEmoji (day) {
     } else {emoji = '😶‍🌫️'}
     return emoji;
 }
+
 // Render current city conditions
 function renderCurrentCity(city) {
     currentCity.textContent = `${city.name} ${dayjs().format('M/DD/YYYY')} ${setWeatherEmoji(city)}` 
@@ -78,6 +81,7 @@ function renderCurrentCity(city) {
     currentCityWind.textContent = `Wind: ${city.wind.speed} MPH`
     currentCityHumidity.textContent = `Humidity: ${city.main.humidity}%`
 }
+
 // Render five day forecast
 function renderFiveDay() {
     // Create elements
@@ -105,12 +109,13 @@ function renderFiveDay() {
     fiveDayCard.append(dateHeader, ul);
     fiveDayRow.append(fiveDayCard);
 }
+
 // Remove elements created in renderFiveDay()
 function resetFiveDay() {
     fiveDayRow.innerText = ''
 }
 
-/* ----------------- MAIN FUNCTION ------------------------ */
+/* ----------------- Main Function ------------------------ */
 // Function to get and render data
 function handleCityInput(city) {
     // OpenWeather API call for current city using city name
@@ -153,6 +158,11 @@ function handleCityInput(city) {
             });                      
 }
 
+/* ----------------------------------------------------------------------------- */
+// Init - Grab last city looked at and render the weather data and create history list from local storage
+handleCityInput(city);
+renderCityList();
+
 // Event Listeners
 // Handle new city on form input
 cityInputForm.addEventListener('submit', function(e) {
@@ -162,3 +172,25 @@ cityInputForm.addEventListener('submit', function(e) {
     handleCityInput(city)
 })
 
+// Sets current city to whatever city button is clicked
+document.body.addEventListener('click', function(e) {
+    if (e.target.classList.contains('prevCityButton')) {
+        city = e.target.innerText;
+        handleCityInput(city);
+        localStorage.setItem('currentCity', city);
+    }
+})
+
+// Handle deleting a city button from the list and removing that city from the list
+document.body.addEventListener('click', function(e) {
+    if (e.target.classList.contains('deleteCityButton')) {
+        buttonToDelete = e.target.parentNode;
+        citytoDelete = e.target.nextSibling.innerText;
+        buttonToDelete.remove();
+        cityList = cityList.filter(function(city) {
+            return city !== citytoDelete;
+        })
+        localStorage.setItem('cityList', JSON.stringify(cityList))
+        return cityList;
+    }
+})
